@@ -20,6 +20,9 @@ export default function BottomBar() {
       <Link href="/new-exhibition" passHref>
         <Button colorScheme="brand" variant="ghost">New</Button>
       </Link>
+      <Link href="/import-pdf" passHref>
+        <Button colorScheme="brand" variant="ghost">Import</Button>
+      </Link>
     </Flex>
   );
 }

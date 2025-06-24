@@ -29,6 +29,11 @@ export default function Home() {
           New Exhibition Record
         </Button>
       </Link>
+      <Link href="/import-pdf" passHref>
+        <Button colorScheme="brand" variant="outline" width="fit-content">
+          Import from PDF
+        </Button>
+      </Link>
       <List spacing={3} mt={4}>
         {exhibitions.map((ex) => (
           <ListItem key={ex.id}>
