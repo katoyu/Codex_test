@@ -24,7 +24,8 @@ export default function ExhibitionForm() {
     );
   };
 
-  const addWork = () => setWorks([...works, { title: '', author: '', image: null, comment: '' }]);
+  const addWork = () =>
+    setWorks([...works, { title: '', author: '', image: null, comment: '' }]);
 
   const removeWork = (index: number) => setWorks(works.filter((_, i) => i !== index));
 
