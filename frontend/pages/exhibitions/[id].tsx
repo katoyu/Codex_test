@@ -1,4 +1,4 @@
-import { Box, Heading, List, ListItem, Text } from '@chakra-ui/react';
+import { Box, Heading, Image, Text, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -6,6 +6,7 @@ import Link from 'next/link';
 interface Work {
   title: string;
   author: string;
+  image?: string | null;
   comment: string;
 }
 
@@ -41,14 +42,24 @@ export default function ExhibitionDetail() {
       <Text>Date: {exhibition.date}</Text>
       <Text mt={2}>{exhibition.overall}</Text>
       <Heading as="h3" size="sm" mt={4} mb={2}>Works</Heading>
-      <List spacing={3}>
+      <VStack spacing={6} align="stretch">
         {exhibition.works.map((work, i) => (
-          <ListItem key={i}>
-            <strong>{work.title}</strong> by {work.author}
-            <Text>{work.comment}</Text>
-          </ListItem>
+          <Box key={i} borderWidth="1px" borderRadius="md" overflow="hidden">
+            {work.image && (
+              <Image src={work.image} alt={work.title} width="100%" />
+            )}
+            <Box p={4}>
+              <Heading as="h4" size="sm">
+                {work.title}
+              </Heading>
+              <Text fontSize="sm" color="gray.600">
+                {work.author}
+              </Text>
+              <Text mt={2}>{work.comment}</Text>
+            </Box>
+          </Box>
         ))}
-      </List>
+      </VStack>
       <Link href="/">Back to Home</Link>
     </Box>
   );

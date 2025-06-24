@@ -4,7 +4,7 @@ import { Box, Button, FormControl, FormLabel, Input, Textarea } from '@chakra-ui
 export interface Work {
   title: string;
   author: string;
-  image?: File | null;
+  image?: string | null;
   comment: string;
 }
 
@@ -17,8 +17,16 @@ interface Props {
 
 export default function WorkInput({ index, work, onChange, onRemove }: Props) {
   const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    onChange(index, 'image', file);
+    const file = e.target.files?.[0];
+    if (!file) {
+      onChange(index, 'image', null);
+      return;
+    }
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      onChange(index, 'image', reader.result as string);
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
