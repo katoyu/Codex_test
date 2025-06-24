@@ -71,8 +71,10 @@ export default function ExhibitionForm() {
             onRemove={removeWork}
           />
         ))}
-        <Button onClick={addWork}>Add Work</Button>
-        <Button type="submit" colorScheme="teal">
+        <Button onClick={addWork} colorScheme="brand" variant="outline">
+          Add Work
+        </Button>
+        <Button type="submit" colorScheme="brand">
           Save Record
         </Button>
       </VStack>
