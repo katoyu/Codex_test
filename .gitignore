@@ -1,0 +1,13 @@
+# Node
+frontend/node_modules/
+node_modules/
+
+# Next.js build output
+frontend/.next/
+.next/
+
+# Env files
+.env
+
+# Yarn lock
+yarn.lock
