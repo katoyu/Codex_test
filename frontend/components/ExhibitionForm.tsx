@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import {
   Box,
   Button,
@@ -15,6 +16,7 @@ export default function ExhibitionForm() {
   const [date, setDate] = useState('');
   const [overall, setOverall] = useState('');
   const [works, setWorks] = useState<Work[]>([]);
+  const router = useRouter();
 
   const handleWorkChange = (index: number, field: keyof Work, value: any) => {
     setWorks((prev) =>
@@ -28,8 +30,20 @@ export default function ExhibitionForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder for submit logic (e.g., Supabase)
-    console.log({ name, date, overall, works });
+    const newRecord = {
+      id: Date.now(),
+      name,
+      date,
+      overall,
+      works,
+    };
+    const existing = JSON.parse(
+      typeof window !== 'undefined'
+        ? localStorage.getItem('exhibitions') || '[]'
+        : '[]'
+    );
+    localStorage.setItem('exhibitions', JSON.stringify([...existing, newRecord]));
+    router.push('/');
   };
 
   return (
