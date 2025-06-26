@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react';
 
 export interface Work {
@@ -16,6 +16,8 @@ interface Props {
 }
 
 export default function WorkInput({ index, work, onChange, onRemove }: Props) {
+  const [loading, setLoading] = useState(false);
+
   const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) {
@@ -27,6 +29,26 @@ export default function WorkInput({ index, work, onChange, onRemove }: Props) {
       onChange(index, 'image', reader.result as string);
     };
     reader.readAsDataURL(file);
+  };
+
+  const searchImage = async () => {
+    if (!work.title && !work.author) return;
+    setLoading(true);
+    try {
+      const params = new URLSearchParams({
+        title: work.title,
+        author: work.author,
+      });
+      const res = await fetch(`/api/searchImage?${params.toString()}`);
+      const data = await res.json();
+      if (data.imageUrl) {
+        onChange(index, 'image', data.imageUrl as string);
+      }
+    } catch (e) {
+      console.error('image search failed', e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,6 +64,9 @@ export default function WorkInput({ index, work, onChange, onRemove }: Props) {
       <FormControl mb={2}>
         <FormLabel>Image</FormLabel>
         <Input type="file" accept="image/*" onChange={handleFile} />
+        <Button mt={2} size="sm" onClick={searchImage} isLoading={loading}>
+          Search Image
+        </Button>
       </FormControl>
       <FormControl mb={2}>
         <FormLabel>Comment</FormLabel>
