@@ -32,3 +32,20 @@ To quickly host the sample app, you can use [Render](https://render.com). The re
 3. Deploy the service. During the build step Render runs `npm install` and `npm run build`, then starts the app with `npm start`.
 
 Once deployed, the app will be available at the URL provided by Render.
+
+## Image Search
+
+The work entry form now includes a **Search Image** button. When clicked, it
+queries the Google Custom Search API using the current title and author fields.
+The first image result is inserted into the form and immediately previewed.
+If the search fails or no result is found, a browser alert will notify you.
+
+Create a `.env.local` file inside the `frontend` directory with the following
+variables to enable this feature:
+
+```bash
+GOOGLE_API_KEY=your-google-api-key
+GOOGLE_CSE_ID=your-custom-search-engine-id
+```
+
+If these variables are missing, the search endpoint will return an error.
