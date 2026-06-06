@@ -1,0 +1,15 @@
+/* 本文の読みやすさを少しだけ調整 */
+.md-grid {
+  max-width: 56rem;
+}
+
+/* コードブロックは少し小さめのフォントで */
+.md-typeset pre > code {
+  font-size: 0.78rem;
+}
+
+/* ノート一覧の日付を控えめに */
+.note-date {
+  color: var(--md-default-fg-color--light);
+  font-variant-numeric: tabular-nums;
+}

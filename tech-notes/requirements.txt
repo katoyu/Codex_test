@@ -1,0 +1,2 @@
+# 技術ノートのビルドに必要な依存。GitHub Actions とローカルプレビューの両方で使う。
+mkdocs-material>=9.5,<10
