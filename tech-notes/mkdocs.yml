@@ -1,0 +1,70 @@
+site_name: 技術ノート
+site_description: 自分のための技術ナレッジベース
+# GitHub Pages で公開する場合は、自分のサイトURLに合わせて site_url を設定してください。
+# 例: https://<ユーザー名>.github.io/tech-notes/
+site_url: ""
+
+theme:
+  name: material
+  language: ja
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: ダークモードへ
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: ライトモードへ
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+
+plugins:
+  - search:
+      lang: ja
+  - tags
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - attr_list
+  - md_in_html
+  - tables
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css
+
+# ナビゲーション。ノートを追加したら、ここの "ノート" セクションにも 1 行追記します
+# （CLAUDE.md の運用ルールを参照）。
+nav:
+  - ホーム: index.md
+  - ノート:
+      - notes/index.md
+      - Temporal API 入門: notes/2026-06-06-temporal-api.md
+  - タグ: tags.md
